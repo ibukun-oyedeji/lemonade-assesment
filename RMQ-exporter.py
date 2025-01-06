@@ -1,3 +1,31 @@
+#This code snippet does the following:
+
+#Import necessary libraries: os, time, requests for interacting with the system and the RabbitMQ API, and prometheus_client for creating and exporting Prometheus metrics.
+
+#Retrieve environment variables:  The code uses os.environ.get() to fetch the RabbitMQ host, username, and password from environment variables, allowing for easy configuration across different deployments.
+
+
+#Define Prometheus metrics: Three Gauge metrics are defined:
+#rabbitmq_individual_queue_messages: Total messages in a queue.
+#rabbitmq_individual_queue_messages_ready: Messages ready for delivery.
+#rabbitmq_individual_queue_messages_unacknowledged: Unacknowledged messages. Each metric includes labels for host, vhost, and name to provide granular information.
+#get_queue_data() function:
+
+#Constructs the URL to the RabbitMQ API endpoint for queues.
+#Uses the requests library to make a GET request to the API with basic authentication.
+#Handles potential errors during the API request.
+#Returns the JSON response containing queue data.
+#update_metrics() function:
+
+#Calls get_queue_data() to fetch the queue data.
+#Iterates through the list of queues in the response.
+#Extracts the relevant information (vhost, name, message counts).
+#Updates the Prometheus metrics with the extracted data using the appropriate labels.
+#Main execution block (if __name__ == '__main__':)
+
+#Starts the Prometheus HTTP server on port 8000, making the metrics accessible.
+#Enters a loop to continuously update the metrics every 15 seconds.
+
 import os
 import time
 import requests
