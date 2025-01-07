@@ -1,3 +1,5 @@
+# This code snippet is a Github workflow showing GitOps operations
+
 name: CI-CD Pipeline
 
 on:
